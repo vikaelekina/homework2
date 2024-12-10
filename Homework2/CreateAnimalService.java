@@ -12,7 +12,7 @@ public interface CreateAnimalService {
             int key = ThreadLocalRandom.current().nextInt(0,AnimalType.values().length);
             AnimalType type = AnimalType.values()[key];
             animals.add(createOneAnimal(type));
-            animals.get(i).printAnimal();
+            System.out.println("Порода: " + animals.get(i).breed + ", имя: " + animals.get(i).name + ", цена в магазине: " + animals.get(i).cost + ", характер: " + animals.get(i).character + ", дата рождения животного: " + animals.get(i).getDateString());
             i++;
         }
         System.out.println("Создание окончено" + "\n");
@@ -40,6 +40,8 @@ public interface CreateAnimalService {
         long random = ThreadLocalRandom.current().nextLong(startDays, endDays);
         return LocalDate.ofEpochDay(random);
     }
+
+    public ArrayList<AbstractAnimal> create();
 
     enum AnimalType {
         Wolf,

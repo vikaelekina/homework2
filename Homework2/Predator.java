@@ -7,7 +7,24 @@ public class Predator extends AbstractAnimal {
         super(breed, name, cost, character, birthDate);
     }
 
-     void hunting(){
+    @Override
+    public boolean equals(AbstractAnimal animal) {
+        if (!this.breed.equals(animal.breed)){
+            return false;
+        }
+        if(!this.name.equals(animal.name)){
+            return false;
+        }
+        if(this.cost!=animal.cost){
+            return false;
+        }
+        if(!this.character.equals(animal.character)){
+            return false;
+        }
+        return this.birthDate == animal.birthDate;
+    }
+
+    void hunting(){
          System.out.println("Охотится");
      };
 }

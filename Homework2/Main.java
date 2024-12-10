@@ -4,15 +4,22 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        CreateAnimalServiceImpl createAnimal = new CreateAnimalServiceImpl();
-        createAnimal.createAnimals();
-        createAnimal.create(4);
-        ArrayList<AbstractAnimal> animals = createAnimal.create();
-        SearchServiceImpl searchAnimal = new SearchServiceImpl();
-        System.out.println(searchAnimal.findLeapYearNames(animals));
-        System.out.println(searchAnimal.findOlderAnimal(animals,10));
-        System.out.println(searchAnimal.findDuplicate(animals));
 
+        CreateAnimalServiceImpl createAnimal = new CreateAnimalServiceImpl();
+        ArrayList<AbstractAnimal> animals = createAnimal.createAnimals();
+        createAnimal.create(4);
+        createAnimal.create();
+        SearchServiceImpl searchAnimal = new SearchServiceImpl();
+        System.out.println("Животные, родившиеся в високосный год:"+"\n"+searchAnimal.findLeapYearNames(animals)+"\n");
+        System.out.println("Животные старше заданного количества лет");
+        searchAnimal.findOlderAnimal(animals,10).forEach(AbstractAnimal::printAnimal);
+        System.out.println("\n"+"Дубликаты:");
+        if (searchAnimal.findDuplicate(animals).isEmpty()){
+            System.out.println("Дубликаты не найдены");
+        }
+        else {
+            searchAnimal.findDuplicate(animals).forEach(AbstractAnimal::printAnimal);
+        }
     }
 }
 

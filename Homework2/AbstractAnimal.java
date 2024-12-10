@@ -1,6 +1,7 @@
 package Homework2;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class AbstractAnimal implements Animal {
     protected String breed;//порода
@@ -34,6 +35,11 @@ public abstract class AbstractAnimal implements Animal {
         return birthDate;
     }
 
+    public String getDateString() {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return birthDate.format(pattern);
+    }
+
     public AbstractAnimal(String breed, String name, double cost, String character, LocalDate birthDate) {
         this.breed = breed;
         this.name = name;
@@ -43,23 +49,9 @@ public abstract class AbstractAnimal implements Animal {
     }
 
     public void printAnimal() {
-        System.out.println("Порода: " + breed + ", имя: " + name + ", цена в магазине: " + cost + ", характер: " + character + ", дата рождения животного:" + birthDate);
+        System.out.println("Порода: " + breed + ", имя: " + name + ", цена в магазине: " + cost + ", характер: " + character + ", дата рождения животного: " + getDateString());
     }
 
-    public boolean equals(AbstractAnimal animal) {
-        if (!this.breed.equals(animal.breed)){
-            return false;
-        }
-        if(!this.name.equals(animal.name)){
-            return false;
-        }
-        if(this.cost!=animal.cost){
-            return false;
-        }
-        if(!this.character.equals(animal.character)){
-            return false;
-        }
-        return this.birthDate == animal.birthDate;
-    }
-
+    public abstract boolean equals(AbstractAnimal animal);
 }
+
