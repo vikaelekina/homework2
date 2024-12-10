@@ -13,8 +13,13 @@ public class SearchServiceImpl implements SearchService {
     public ArrayList<AbstractAnimal> findOlderAnimal (ArrayList<AbstractAnimal> animals, int N){
         return animals.stream().filter(a->a.getLocalDate().plusYears(N).isBefore(LocalDate.now())).collect(Collectors.toCollection(ArrayList::new));
     };
-    public ArrayList<AbstractAnimal> findDuplicate (ArrayList<AbstractAnimal> animals){
+    public void findDuplicate (ArrayList<AbstractAnimal> animals){
         Set<AbstractAnimal> elements = new HashSet<>();
-        return animals.stream().filter(a->!elements.add(a)).collect(Collectors.toCollection(ArrayList::new));
+        if (animals.stream().filter(a->!elements.add(a)).collect(Collectors.toCollection(ArrayList::new)).isEmpty()){
+            System.out.println("Дубликаты не найдены");
+        }
+        else {
+            animals.stream().filter(a->!elements.add(a)).collect(Collectors.toCollection(ArrayList::new)).forEach(AbstractAnimal::printAnimal);
+        }
     };
 }
