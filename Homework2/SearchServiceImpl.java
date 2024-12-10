@@ -15,11 +15,12 @@ public class SearchServiceImpl implements SearchService {
     };
     public void findDuplicate (ArrayList<AbstractAnimal> animals){
         Set<AbstractAnimal> elements = new HashSet<>();
+        System.out.println("\n"+"Дубликаты:");
         if (animals.stream().filter(a->!elements.add(a)).collect(Collectors.toCollection(ArrayList::new)).isEmpty()){
             System.out.println("Дубликаты не найдены");
         }
         else {
-            animals.stream().filter(a->!elements.add(a)).collect(Collectors.toCollection(ArrayList::new)).forEach(AbstractAnimal::printAnimal);
+            animals.stream().filter(a->!elements.add(a)).forEach(AbstractAnimal::printAnimal);
         }
     };
 }
